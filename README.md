@@ -1,6 +1,8 @@
 # banderfront
 Frontend Webserver for Bandersnatch Mirrors
 
+![banderfront layout](./banderfront_diagram.png)
+
 Replaces the need for bandersnatch to generate static simple HTML and Apache or NGINX to do rewrites.
 
 - Removes the need current dependency bandersnatch has for a filesystem to store static HTML on
