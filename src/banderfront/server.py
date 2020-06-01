@@ -7,6 +7,8 @@ from os import environ
 
 from aiohttp import web
 
+from banderfront.routes import package_download, simple_root, simple_package_root
+
 
 LOG = logging.getLogger(__name__)
 ROOT_ASCII = r"""
@@ -17,20 +19,9 @@ ROOT_ASCII = r"""
 |____/  \__,_||_| |_| \__,_| \___||_|   |___/|_| |_| \__,_| \__| \___||_| |_|  |_|     \__, ||_|    |___|  |_|  |_||_||_|   |_|    \___/ |_|
                                                                                        |___/
 """
-SIXTYNINE_ASCII = r""".------..------.
-|6.--. ||9.--. |
-| (\/) || :/\: |
-| :\/: || (__) |
-| '--'6|| '--'9|
-`------'`------'
-"""
 
 async def index(request: web.Request) -> web.Response:
     return web.Response(text=ROOT_ASCII)
-
-
-async def sixtynine(request: web.Request) -> web.Response:
-    return web.Response(text=SIXTYNINE_ASCII)
 
 
 async def serve() -> web.Application:
@@ -43,8 +34,9 @@ async def serve() -> web.Application:
 
     app = web.Application()
     app.router.add_get("/", index)
-    app.router.add_get("/69", sixtynine)
-    app.router.add_get("/sixtynine", sixtynine)
+    app.router.add_get("/packages/{url_path:.+}", package_download)
+    app.router.add_get("/simple", simple_root)
+    app.router.add_get("/simple/{package_name}", simple_package_root)
 
     LOG.debug("Finished setting up routes")
     return app

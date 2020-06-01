@@ -31,6 +31,12 @@ python3 -m venv /tmp/tbf/
     --workers=2 --worker-class=aiohttp.worker.GunicornUVLoopWebWorker "banderfront.server:serve"
 ```
 
+### Redis Development
+
+- Pull + Start Redis
+  - `docker pull redis:latest`
+  - `docker run --name redis -d -p 6379:6379 redis`
+
 ### Expected start logs
 
 ```
