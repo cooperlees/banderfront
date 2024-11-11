@@ -1,6 +1,6 @@
 aiohttp==3.10.10
 aioredis==2.0.1
-async-timeout==5.0.0
+async-timeout==5.0.1
 attrs==24.2.0
 bandersnatch==6.5.0
 chardet==5.2.0
