@@ -5,7 +5,7 @@ attrs==25.3.0
 bandersnatch==6.6.0
 chardet==5.2.0
 gunicorn==23.0.0
-hiredis==3.1.0
+hiredis==3.1.1
 idna==3.10
 multidict==6.4.3
 uvloop==0.21.0
