@@ -1,7 +1,7 @@
 aiohttp==3.12.15
 aioredis==2.0.1
 async-timeout==5.0.1
-attrs==25.3.0
+attrs==25.4.0
 bandersnatch==6.6.0
 chardet==5.2.0
 gunicorn==23.0.0
