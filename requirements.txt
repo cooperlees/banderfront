@@ -9,4 +9,4 @@ hiredis==3.2.1
 idna==3.11
 multidict==6.7.0
 uvloop==0.21.0
-yarl==1.20.1
+yarl==1.22.0
