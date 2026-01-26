@@ -7,6 +7,6 @@ chardet==5.2.0
 gunicorn==23.0.0
 hiredis==3.3.0
 idna==3.11
-multidict==6.7.0
+multidict==6.7.1
 uvloop==0.22.1
 yarl==1.22.0
