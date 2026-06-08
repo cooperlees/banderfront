@@ -6,7 +6,7 @@ bandersnatch==6.6.0
 chardet==5.2.0
 gunicorn==23.0.0
 hiredis==3.4.0
-idna==3.17
+idna==3.18
 multidict==6.7.1
 uvloop==0.22.1
 yarl==1.22.0
