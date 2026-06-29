@@ -8,5 +8,6 @@ gunicorn==26.0.0
 hiredis==3.4.0
 idna==3.18
 multidict==6.7.1
+mypy==1.16.0
 uvloop==0.22.1
 yarl==1.24.2

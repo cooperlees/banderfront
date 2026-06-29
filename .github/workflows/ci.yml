@@ -8,14 +8,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.14"]
+        python-version: ["3"]
         os: [ubuntu-latest]
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@master
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -26,6 +26,10 @@ jobs:
     - name: Install base pinned requirements
       run: |
         python -m pip install -r requirements.txt
+
+    - name: Run mypy strict type checking
+      run: |
+        python -m mypy src/banderfront
 
     - name: Run Integration Test
       env:

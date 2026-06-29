@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "banderfront"
+version = "0.0.1.dev0"
+description = "Simple HTTP frontend for a Python Bandersnatch Mirror"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.14"
+authors = [{name = "Cooper Lees", email = "me@cooperlees.com"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+    "Development Status :: 3 - Alpha",
+]
+dependencies = [
+    "aiohttp",
+    "bandersnatch",
+    "gunicorn",
+    "uvloop",
+]
+
+[project.optional-dependencies]
+s3 = ["aioboto3"]
+swift = ["python-swiftclient"]
+
+[project.urls]
+Homepage = "https://github.com/cooperlees/banderfront/"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true

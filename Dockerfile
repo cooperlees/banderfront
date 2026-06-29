@@ -1,7 +1,7 @@
 FROM python:3
 
 RUN mkdir -p /src/src
-COPY setup.py /src
+COPY pyproject.toml /src
 COPY requirements.txt /src
 COPY src/ /src/src
 
