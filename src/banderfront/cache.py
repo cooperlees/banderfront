@@ -4,8 +4,9 @@ import asyncio
 import logging
 from abc import ABC, abstractmethod
 from types import TracebackType
+from typing import cast
 
-import aioredis
+import redis.asyncio as redis
 from packaging.utils import canonicalize_name
 
 
@@ -44,10 +45,10 @@ class BanderCache(ABC):
 class RedisBanderCache(BanderCache):
     def __init__(self, hostname: str = "localhost") -> None:
         self.hostname = hostname
-        self._pool: aioredis.Redis | None = None  # type: ignore[type-arg]
+        self._pool: redis.Redis | None = None
 
     async def __aenter__(self) -> "RedisBanderCache":
-        self._pool = aioredis.from_url(
+        self._pool = redis.from_url(
             f"redis://{self.hostname}", decode_responses=True
         )
         return self
@@ -59,10 +60,10 @@ class RedisBanderCache(BanderCache):
         exc_tb: TracebackType | None,
     ) -> None:
         if self._pool is not None:
-            await self._pool.close()
+            await self._pool.aclose()
 
     @property
-    def pool(self) -> aioredis.Redis:  # type: ignore[type-arg]
+    def pool(self) -> redis.Redis:
         if self._pool is None:
             raise RuntimeError(
                 "RedisBanderCache not initialised - use as a context manager"
@@ -71,22 +72,22 @@ class RedisBanderCache(BanderCache):
 
     async def get_package_simple_index(self, package_name: str) -> str:
         package_html_key, package_serial_key = self.canon_key_names(package_name)
-        serial: str | None = await self.pool.get(package_serial_key)
+        serial = cast("str | None", await self.pool.get(package_serial_key))
         if serial is None:
             raise CacheMiss("No serial - need to generate HTML")
 
-        global_serial: str | None = await self.pool.get(self.serial_key)
+        global_serial = cast("str | None", await self.pool.get(self.serial_key))
         if global_serial is None or int(global_serial) > int(serial):
             raise CacheMiss("Index is out of date")
 
-        html: str | None = await self.pool.get(package_html_key)
+        html = cast("str | None", await self.pool.get(package_html_key))
         if not html:
             raise CacheMiss("HTML is invalid - Regenerate")
 
         return html
 
     async def get_simple_index(self) -> str:
-        html: str | None = await self.pool.get(self.index_key)
+        html = cast("str | None", await self.pool.get(self.index_key))
         if not html:
             raise CacheMiss("Global Index HTML is invalid - Regenerate")
 
