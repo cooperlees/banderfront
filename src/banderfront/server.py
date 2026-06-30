@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-present, Facebook, Inc.
 
-import asyncio
 import logging
 from os import environ
 
