@@ -3,7 +3,7 @@ async-timeout==5.0.1
 attrs==26.1.0
 bandersnatch==8.0.0
 chardet==7.6.0
-gunicorn==26.1.0
+gunicorn==26.2.0
 hiredis==3.4.1
 idna==3.19
 multidict==6.7.1
